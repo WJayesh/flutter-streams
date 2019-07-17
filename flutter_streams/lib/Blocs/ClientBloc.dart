@@ -8,6 +8,7 @@ class UserBloc extends BlocBase{
     counter = 0;
     counterController.stream.listen((data){
       counter = counter + 1;
+      counterObserverController.sink.add(counter);
     });
   }
   int counter;
@@ -23,11 +24,15 @@ class UserBloc extends BlocBase{
   StreamController<int> counterController = StreamController<int>.broadcast();
   StreamSink<int> get sinkCounter => counterController.sink;
 
+  StreamController<int> counterObserverController = StreamController<int>.broadcast();
+  Stream<int> get counterStream => counterObserverController.stream;  
+
 
   void dispose(){
     outStatusOneController.close();
     outStatusTwoController.close();
     counterController.close();
+    counterObserverController.close();
   }
   
 } 

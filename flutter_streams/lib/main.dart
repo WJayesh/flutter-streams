@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Streams',
       theme: ThemeData(
-        primarySwatch: Colors.green.shade300,
+        primarySwatch: Colors.green,
       ),
       home: BlocProvider(
         bloc: UserBloc(),
@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Client client;
+  Client client = new Client(true, true, true, true);
   UserBloc bloc;
 
   @override 
@@ -69,16 +69,19 @@ void initState(){
                   initialData: Message(true, 1),
                   builder: (BuildContext context, AsyncSnapshot<Message> snapshot){
                     return (snapshot.data.value == true)?
-                GestureDetector(
+                Flexible(child: GestureDetector(
                   onDoubleTap: (){
                     bloc.sinkStatusOne.add(new Message(false, 1));
                     bloc.sinkCounter.add(null);
                     //client.setStatusOne(false);
                   },
                   child: Card(
-                      child: Text("First Card"),
+                      margin: EdgeInsets.symmetric(horizontal: 4, vertical: 45),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 5),
+                        child: Text("First Card"),)
                     )
-                ): Container();
+                )): Container();
                   }),
                 
                 
@@ -88,7 +91,7 @@ void initState(){
               children: <Widget>[
 
                 StreamBuilder<Message>(
-                  stream: bloc.outStatusOne,
+                  stream: bloc.outStatusTwo,
                   initialData: Message(true, 1),
                   builder: (BuildContext context, AsyncSnapshot<Message> snapshot){
                     return (snapshot.data.value == true)?
@@ -99,7 +102,10 @@ void initState(){
                     //client.setStatusTwo(false);
                   },
                   child: Card(
-                      child: Text("Second Card"),
+                      margin: EdgeInsets.symmetric(horizontal: 2, vertical: 10),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                        child: Text("Second Card"),)
                     )
                 ): Container();
                   }),
@@ -113,7 +119,10 @@ void initState(){
                     //client.setStatusTwo(false);
                   },
                   child: Card(
-                      child: Text("Third Card"),
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+                        child: Text("Third Card"),)
                     )
                 ): Container(),
               ],
@@ -121,18 +130,27 @@ void initState(){
             Column(
               children: <Widget>[
                 Card(
-                  child: Text("Fourth Card"),
-                ),
+                      margin: EdgeInsets.symmetric(horizontal: 0, vertical: 30),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                        child: Text("Fourth Card"),)
+                    ),
               ],
             ),
           ],
         ),
       
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: StreamBuilder(
+        stream: bloc.counterObserverController.stream,
+        initialData: 0,
+        builder: (BuildContext context, AsyncSnapshot<int> snapshot){
+          return FloatingActionButton(
           onPressed: (){},
           tooltip: 'Number',
-          child: Text("${bloc.counter}"),
-          ),
+          child: Text("${snapshot.data}"),
+          );
+        },
+      ) 
         
        
     );
