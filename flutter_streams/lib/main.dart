@@ -35,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Client client = new Client(true, true, true, true);
   UserBloc bloc;
+  int counter_two = 0;
 
   @override 
 void initState(){
@@ -54,6 +55,7 @@ void initState(){
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -73,6 +75,7 @@ void initState(){
                   onDoubleTap: (){
                     bloc.sinkStatusOne.add(new Message(false, 1));
                     bloc.sinkCounter.add(null);
+                    counter_two += 1;
                     //client.setStatusOne(false);
                   },
                   child: Card(
@@ -101,6 +104,7 @@ void initState(){
                   onDoubleTap: (){
                     bloc.sinkStatusTwo.add(new Message(false, 1));
                     bloc.sinkCounter.add(null);
+                    counter_two += 1;
                     //client.setStatusTwo(false);
                   },
                   child: Card(
@@ -119,6 +123,7 @@ void initState(){
                     setState(() {
                      client.setStatusThree(false);
                      bloc.sinkCounter.add(null);
+                     counter_two += 1;
                     });
                     //client.setStatusTwo(false);
                   },
@@ -148,18 +153,21 @@ void initState(){
           ],
         ),
       
-      floatingActionButton: StreamBuilder(
-        stream: bloc.counterObserverController.stream,
-        initialData: 0,
-        builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-          return FloatingActionButton(
-          onPressed: (){},
-          tooltip: 'Number',
-          child: Text("${snapshot.data}"),
-          );
-        },
-      ) 
-        
+      // floatingActionButton: StreamBuilder(
+      //   stream: bloc.counterObserverController.stream,
+      //   initialData: 0,
+      //   builder: (BuildContext context, AsyncSnapshot<int> snapshot){
+      //     return FloatingActionButton(
+      //     onPressed: (){},
+      //     tooltip: 'Number',
+      //     child: Text("${snapshot.data}"),
+      //     );
+      //   },
+      // ) 
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Text("$counter_two"),
+      ),  
        
     );
   }
