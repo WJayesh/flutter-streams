@@ -76,6 +76,8 @@ void initState(){
                     //client.setStatusOne(false);
                   },
                   child: Card(
+                      color: Colors.amber.shade300,
+                      elevation: 16,
                       margin: EdgeInsets.symmetric(horizontal: 4, vertical: 45),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 50, horizontal: 5),
@@ -102,6 +104,8 @@ void initState(){
                     //client.setStatusTwo(false);
                   },
                   child: Card(
+                      color: Colors.lightBlue.shade200,
+                      elevation: 10,
                       margin: EdgeInsets.symmetric(horizontal: 2, vertical: 10),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -119,6 +123,8 @@ void initState(){
                     //client.setStatusTwo(false);
                   },
                   child: Card(
+                      color: Colors.lightGreen.shade200,
+                      elevation: 12,
                       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
                       child: Padding(
                         padding: EdgeInsets.symmetric(vertical: 40, horizontal: 40),
@@ -130,6 +136,8 @@ void initState(){
             Column(
               children: <Widget>[
                 Card(
+                      elevation: 20,
+                      color: Colors.pink.shade100,
                       margin: EdgeInsets.symmetric(horizontal: 0, vertical: 30),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
