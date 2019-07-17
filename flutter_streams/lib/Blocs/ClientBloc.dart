@@ -1,15 +1,33 @@
 import 'package:flutter_streams/BlocBase.dart';
 import 'dart:async';
 
-class UserBloc extends BlocBase{
+import 'package:flutter_streams/Message.dart';
 
-  StreamController<int> notDone1Controller = StreamController<int>.broadcast();
-  Stream<int> get outNotDone1 => notDone1Controller.stream;
-  StreamSink<int> get sinkNotDone1 => notDone1Controller.sink;
+class UserBloc extends BlocBase{
+  UserBloc(){
+    counter = 0;
+    counterController.stream.listen((data){
+      counter = counter + 1;
+    });
+  }
+  int counter;
+
+  StreamController<Message> outStatusOneController = StreamController<Message>.broadcast();
+  Stream<Message> get outStatusOne => outStatusOneController.stream;
+  StreamSink<Message> get sinkStatusOne => outStatusOneController.sink;
+
+  StreamController<Message> outStatusTwoController = StreamController<Message>.broadcast();
+  Stream<Message> get outStatusTwo => outStatusTwoController.stream;
+  StreamSink<Message> get sinkStatusTwo => outStatusTwoController.sink;
+
+  StreamController<int> counterController = StreamController<int>.broadcast();
+  StreamSink<int> get sinkCounter => counterController.sink;
 
 
   void dispose(){
-    notDone1Controller.close();
+    outStatusOneController.close();
+    outStatusTwoController.close();
+    counterController.close();
   }
   
 } 

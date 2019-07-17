@@ -1,4 +1,4 @@
-import 'package:companion/BlocBase.dart';
+import 'package:flutter_streams/BlocBase.dart';
 import 'package:flutter/widgets.dart';
 
 Type _typeOf<T>() => T;
