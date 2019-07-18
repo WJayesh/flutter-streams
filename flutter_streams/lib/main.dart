@@ -68,7 +68,7 @@ void initState(){
               children: <Widget>[
                 StreamBuilder<Message>(
                   stream: bloc.outStatusOne,
-                  initialData: Message(true, 1),
+                  initialData: Message(client.statusOne, 1),
                   builder: (BuildContext context, AsyncSnapshot<Message> snapshot){
                     return (snapshot.data.value == true)?
                 Flexible(child: GestureDetector(
@@ -97,7 +97,7 @@ void initState(){
 
                 StreamBuilder<Message>(
                   stream: bloc.outStatusTwo,
-                  initialData: Message(true, 1),
+                  initialData: Message(client.statusTwo, 1),
                   builder: (BuildContext context, AsyncSnapshot<Message> snapshot){
                     return (snapshot.data.value == true)?
                 GestureDetector(
